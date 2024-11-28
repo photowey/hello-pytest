@@ -15,6 +15,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+
 import pymysql
 
 from localtool.mysql.option import Options
@@ -29,8 +30,12 @@ class Mysql(object):
 
     def connection(self) -> pymysql.connect:
         connection: pymysql.connect = pymysql.connect(
-            host=self.options.host, user=self.options.user,
-            password=self.options.password, database=self.options.database, port=self.options.port)
+            host=self.options.host,
+            user=self.options.user,
+            password=self.options.password,
+            database=self.options.database,
+            port=self.options.port
+        )
 
         return connection
 
@@ -43,9 +48,11 @@ class Mysql(object):
     def insert(self, sql: str, parameters: []):
         rows = 0
         cursor = self.connection.cursor()
+
         for parameter in parameters:
             single_rows = cursor.execute(sql, parameter)
             rows += single_rows
+
         cursor.close()
         self.commit()
         self.close()

@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 
+
 #  Copyright © 2024 the original author or authors.
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,18 +14,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-#
-#  Licensed under the Apache License, Version 2.0 (the "License");
-#  you may not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and
-#  limitations under the License.
+
 
 import logging
 import os
@@ -36,7 +26,6 @@ def makedir_if_necessary(target_path):
     """
     makedir if necessary
     :param target_path:
-    :return:
     """
     if not os.path.exists(target_path):
         os.makedirs(target_path)
@@ -44,10 +33,10 @@ def makedir_if_necessary(target_path):
 
 class PytestLogger:
     """
-    日志记录控件类
+    pytest logger
     """
 
-    def __init__(self):
+    def __init__(self, project='pytest'):
         """
         设置 logger 日志 path
         """
@@ -58,9 +47,11 @@ class PytestLogger:
 
         self.log_name = logger_path + os.sep + time.strftime('%Y%m%d%H%M%S') + '.log'
         self.strf_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        # 创建一个 logger
-        pylogger = logging.getLogger('pylogger')
+
+        # 创建一个 名为  ${project} 的 logger
+        pylogger = logging.getLogger(project)
         pylogger.setLevel(logging.DEBUG)
+
         self.logger = pylogger
 
     def print_console(self, level, message):
@@ -78,7 +69,7 @@ class PytestLogger:
 
         # 定义 handler 的输出格式
         formatter = logging.Formatter(
-            '%(asctime)s - %(name)s - %(filename)s[line:%(lineno)d] - %(levelname)s : %(message)s')
+            '%(asctime)s - %(name)s - %(filename)s[%(lineno)d] - %(levelname)s : %(message)s')
 
         file_handler.setFormatter(formatter)
         stream_handler.setFormatter(formatter)

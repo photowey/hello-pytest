@@ -28,14 +28,14 @@ import pytest
 
 @allure.feature('Feature1')
 @allure.story('Story1')
-@allure.testcase('http://my.tms.org/TESTCASE-1')
+@allure.testcase('https://pytest.happycoding.dev/testcases/foo')
 def test_foo():
     assert False
 
 
 @allure.feature('Feature2')
 @allure.story('Story2')
-@allure.testcase('http://my.tms.org/TESTCASE-2')
+@allure.testcase('https://pytest.happycoding.dev/testcases/function')
 def test_function():
     """
     test execution the function.
